@@ -1,18 +1,18 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Diner Object that reps single diner
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var Diner = function(name) {
 	this.name = name;
     this.dishes = [];
