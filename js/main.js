@@ -1,5 +1,18 @@
 // Diner Object that reps single diner
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 var Diner = function(name) {
 	this.name = name;
     this.dishes = [];
@@ -29,9 +42,10 @@ var Check = function(){
 	this.tip = 0.20;
 }
 
+// I DONT GET THIS PART
 
-Check.prototype.addDiner = function(diner){
-	this.diners.push(diner);
+Check.prototype.addDiner = function(personObject){ // still confused by this
+	this.diners.push(personObject); // how does it get the diner object? what does the diner object look like?
 }
 
 
@@ -56,11 +70,26 @@ Check.prototype.total = function(){
 
 Check.prototype.split = function(){
 	//they need to split their own food, look at the array of diner! loop over diner
+	var baseCost = 0;
 
 
-	//
+	for (var i = 0; i < this.diners.length; i++) {
+		baseCost += this.diners[i].totalDishCost(); //Methods need ();
+	};
+
+	var totalWithTip = baseCost * this.tip;
+	var tipShare = totalWithTip / this.diners.length;
+
+	for (var i = 0; i < this.diners.length; i++) {
+		var dinerCost = (this.diners[i].totalDishCost() + (this.diners[i].totalDishCost() * this.tax)) + tipShare;
+		console.log(this.diners[i].name + ': $' + dinerCost.toFixed(2));
+
+	};
+	
+	var total = baseCost + (baseCost * this.tax) + (baseCost * this.tip)
 
 
+	console.log('Total: $' + total.toFixed(2));
 
 
 }
@@ -68,16 +97,23 @@ Check.prototype.split = function(){
 
 
 
+var check1 = new Check();
 
-var check = new Check();
 var abby = new Diner("Abby");
 abby.addDish('burger', 5);
-check.addDiner(abby);
+
+check1.addDiner(abby);
+
 var tj = new Diner("TJ");
-abby.addDish('pizza', 17);
-check.addDiner(tj);
-console.log(check.diners);
-console.log(check.total());
+tj.addDish('pizza', 17);
+check1.addDiner(tj);
+
+
+console.log(check1.split());
+
+
+var check2 = new Check();
+
 
 //
 
