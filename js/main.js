@@ -1,3 +1,54 @@
+$( document ).ready(function() {
+    console.log( "ready!" );
+
+    var check1 = new Check();
+
+    var diner1 = new Diner("diner1");
+    var diner2 = new Diner("diner2");
+
+
+    var menu = {
+    	chicken: 10, 
+    	pizza: 5, 
+    	tiramisu: 3, 
+    	tuscan: 10, 
+    	steak:24, 
+    	wine:8
+    };
+
+
+//if someone click on button, call function that totals everything
+	$('.total').click(function(){
+		
+		var item1 = $('#diner1Item').val();
+		var price1 = menu[item1]; //[] have access to keys
+
+
+		var item2 = $('#diner2Item').val();
+		var price2 = menu[item2]; //[] have access to keys
+
+		
+
+		diner1.addDish(item1, price1);
+
+		diner2.addDish(item3, price3);
+
+
+		check1.addDiner(diner1);
+		check1.addDiner(diner2);
+
+
+		var total = check1.total();
+
+		$('.show_total').text("$"+total);
+
+
+
+
+
+		// Check.total();
+		// $('.show_total).html();
+	})
 
 
 
@@ -5,11 +56,7 @@
 
 
 
-
-
-
-
-
+}); // belongs to document get ready
 
 
 // Diner Object that reps single diner
@@ -96,23 +143,6 @@ Check.prototype.split = function(){
 
 
 
-
-var check1 = new Check();
-
-var abby = new Diner("Abby");
-abby.addDish('burger', 5);
-
-check1.addDiner(abby);
-
-var tj = new Diner("TJ");
-tj.addDish('pizza', 17);
-check1.addDiner(tj);
-
-
-console.log(check1.split());
-
-
-var check2 = new Check();
 
 
 //
