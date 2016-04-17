@@ -103,12 +103,24 @@ Check.prototype.addDiner = function(personObject){ // still confused by this
 // Getting check total
 Check.prototype.total = function(){ 
 	var total = 0;
+	// start out at 0
 
 	for (var i = 0; i < this.diners.length; i++) {
 		total += this.diners[i].totalDishCost(); //Methods need ();
+		// loop through each diner adding their cost 
+		// example, both eat chicken parm, both pay 10
+		// total is 20
 	};
-	total = total+(total * this.tip);
+	
+	tip = total * this.tip;
+	// just get the tip, not the total + the tip
+	// if total is 20 than tip will be 4 (assuming 0.08 tax rate)
 	total = total+(total * this.tax);
+	// now add the total + total * tax
+	// ex: 21.60
+	total = total + tip;
+	// now add the tip that was calculated before tax to the new total w/ tax
+	// ex: 21.60 + 4 = 25.60
 	
 
 	return total.toFixed(2); // we are returning ALL the diners. 
@@ -121,22 +133,34 @@ Check.prototype.total = function(){
 Check.prototype.split = function(){
 	//they need to split their own food, look at the array of diner! loop over diner
 	var baseCost = 0;
+	// start at 0
 
 
 	for (var i = 0; i < this.diners.length; i++) {
 		baseCost += this.diners[i].totalDishCost(); //Methods need ();
+		// loop through each diner adding their cost
+		// example, both eat chicken parm, both pay 10
+		// total is 20
 	};
 
 	var totalWithTip = baseCost * this.tip;
+	// name of variable is confusing, this is not the total w/ tip
+	// but just the tip, Ex: 20 * 0.20 = 4
 	var tipShare = totalWithTip / this.diners.length;
+	// dividing the tip by the number of diners
+	// Ex. 4 / 2 = 2.00 for each diner to pay tip
 
 	for (var i = 0; i < this.diners.length; i++) {
 		var dinerCost = (this.diners[i].totalDishCost() + (this.diners[i].totalDishCost() * this.tax)) + tipShare;
 		console.log(this.diners[i].name + ': $' + dinerCost.toFixed(2));
+		// getting the diners total dish cost and adding in that amount * tax, then adding in tip
+		// Ex. 10.00 + (10.00*0.08 = 10.80) + 2 = 12.80
 
 	};
 	
 	var total = baseCost + (baseCost * this.tax) + (baseCost * this.tip)
+	// total of both diners before tax and tip + that same total * tax + that same total * tip
+	// Ex. 20 + (20*0.08) + (20*0.20) = 25.60
 
 
 	console.log('Total: $' + total.toFixed(2));
