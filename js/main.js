@@ -31,7 +31,7 @@ $( document ).ready(function() {
 
 		diner1.addDish(item1, price1);
 
-		diner2.addDish(item3, price3);
+		diner2.addDish(item2, price2);
 
 
 		check1.addDiner(diner1);
@@ -42,7 +42,9 @@ $( document ).ready(function() {
 
 		$('.show_total').text("$"+total);
 
+		// reset total back to zero
 
+		check1.split();
 
 
 
@@ -105,10 +107,11 @@ Check.prototype.total = function(){
 	for (var i = 0; i < this.diners.length; i++) {
 		total += this.diners[i].totalDishCost(); //Methods need ();
 	};
-	total = total+(total * this.tax);
 	total = total+(total * this.tip);
+	total = total+(total * this.tax);
+	
 
-	return total; // we are returning ALL the diners. 
+	return total.toFixed(2); // we are returning ALL the diners. 
 
 }
 
